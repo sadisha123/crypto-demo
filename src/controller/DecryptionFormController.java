@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import util.DEP7Crypto;
 
 public class DecryptionFormController {
     public TextField txtCipherText;
@@ -41,21 +42,8 @@ public class DecryptionFormController {
         //}
         //
         //txtCipherText.setText(ciphertext);
-        String reversedText = "";
-        for(int i = 0; i < cipherText.length(); i++){
-            int code = cipherText.charAt(i);
-            code -= 10;
-            char orgChar = (char) code;
-            reversedText += orgChar;
-        }
 
-        String originalText = "";
-        for(int i = reversedText.length() - 1; i >= 0; i--){
-               originalText += reversedText.charAt(i);
-        }
-
-        originalText = originalText.substring(0,originalText.length() - key.length());
-        txtText.setText(originalText);
+        txtText.setText(DEP7Crypto.decrypt(cipherText, key));
 
     }
 }
